@@ -41,6 +41,10 @@
     //#define RSTPIN  4
     #define SERIAL Serial
 #endif
+#define TEMP1 2
+#define TEMP2 3
+
+bool flag = 0;
 
 SHT35 sensor(SCLPIN);
 
@@ -52,6 +56,8 @@ void setup() {
     if (sensor.init()) {
         SERIAL.println("sensor init failed!!!");
     }
+    pinMode(TEMP1,OUTPUT);
+    pinMode(TEMP2,OUTPUT);
     delay(1000);
 }
 
@@ -59,25 +65,63 @@ void setup() {
 void loop() {
     u16 value = 0;
     u8 data[6] = {0};
-    float temp, hum;
-    if (NO_ERROR != sensor.read_meas_data_single_shot(HIGH_REP_WITH_STRCH, &temp, &hum)) {
-        SERIAL.println("read temp failed!!");
-        SERIAL.println("   ");
-        SERIAL.println("   ");
-        SERIAL.println("   ");
-    } else {
-        SERIAL.println("read data :");
-        SERIAL.print("temperature = ");
-        SERIAL.print(temp);
-        SERIAL.println(" ℃ ");
 
-        SERIAL.print("humidity = ");
-        SERIAL.print(hum);
-        SERIAL.println(" % ");
+    flag = !flag;
+    digitalWrite(TEMP1,flag);
+    digitalWrite(TEMP2,!flag);
 
-        SERIAL.println("   ");
-        SERIAL.println("   ");
-        SERIAL.println("   ");
+    if (flag)
+    {
+        float temp1, hum1;
+        if (NO_ERROR != sensor.read_meas_data_single_shot(HIGH_REP_WITH_STRCH, &temp1, &hum1))
+        {
+            SERIAL.println("read temp failed!!");
+            SERIAL.println("   ");
+            SERIAL.println("   ");
+            SERIAL.println("   ");
+        }
+        else
+        {
+            SERIAL.println("read data :");
+            SERIAL.print("temperature = ");
+            SERIAL.print(temp1);
+            SERIAL.println(" ℃ ");
+
+            SERIAL.print("humidity = ");
+            SERIAL.print(hum1);
+            SERIAL.println(" % ");
+
+            SERIAL.println("   ");
+            SERIAL.println("   ");
+            SERIAL.println("   ");
+        }
     }
+    else if (!flag)
+    {
+        float temp2, hum2;
+        if (NO_ERROR != sensor.read_meas_data_single_shot(HIGH_REP_WITH_STRCH, &temp2, &hum2))
+        {
+            SERIAL.println("read temp failed!!");
+            SERIAL.println("   ");
+            SERIAL.println("   ");
+            SERIAL.println("   ");
+        }
+        else
+        {
+            SERIAL.println("read data :");
+            SERIAL.print("temperature = ");
+            SERIAL.print(temp2);
+            SERIAL.println(" ℃ ");
+
+            SERIAL.print("humidity = ");
+            SERIAL.print(hum2);
+            SERIAL.println(" % ");
+
+            SERIAL.println("   ");
+            SERIAL.println("   ");
+            SERIAL.println("   ");
+        }
+    }
+    
     delay(1000);
 }
