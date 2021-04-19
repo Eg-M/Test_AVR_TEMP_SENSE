@@ -27,7 +27,7 @@
 */
 
 #include "Seeed_SHT35.h"
-
+  
 
 /*SAMD core*/
 #ifdef ARDUINO_SAMD_VARIANT_COMPLIANCE
