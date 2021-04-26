@@ -42,7 +42,7 @@
     #define SERIAL Serial
 #endif
 #define TEMP1 2
-#define TEMP2 3
+#define TEMP2 4
 
 bool flag = 0;
 
