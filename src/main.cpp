@@ -83,18 +83,19 @@ void loop() {
         }
         else
         {
-            SERIAL.println("read data1 :");
-            SERIAL.print("temperature1 = ");
+            //SERIAL.println("read data1 :");
+            //SERIAL.print("temperature1 = ");
             SERIAL.print(temp1);
-            SERIAL.println(" ℃ ");
+            //SERIAL.println(" ℃ ");
+            SERIAL.print(',');
 
-            SERIAL.print("humidity1 = ");
+            //SERIAL.print("humidity1 = ");
             SERIAL.print(hum1);
-            SERIAL.println(" % ");
-
-            SERIAL.println("   ");
-            SERIAL.println("   ");
-            SERIAL.println("   ");
+            //SERIAL.println(" % ");
+            SERIAL.print(',');
+            //SERIAL.println("   ");
+            //SERIAL.println("   ");
+            //SERIAL.println("   ");
         }
     }
     else if (!flag)
@@ -109,20 +110,20 @@ void loop() {
         }
         else
         {
-            SERIAL.println("read data :");
-            SERIAL.print("temperature2 = ");
+            //SERIAL.println("read data :");
+            //SERIAL.print("temperature2 = ");
             SERIAL.print(temp2);
-            SERIAL.println(" ℃ ");
+            //SERIAL.println(" ℃ ");
+            SERIAL.print(',');
+            //SERIAL.print("humidity2 = ");
+            SERIAL.println(hum2);
+            //SERIAL.println(" % ");
 
-            SERIAL.print("humidity2 = ");
-            SERIAL.print(hum2);
-            SERIAL.println(" % ");
-
-            SERIAL.println("   ");
-            SERIAL.println("   ");
-            SERIAL.println("   ");
+            //SERIAL.println("   ");
+            //SERIAL.println("   ");
+            //SERIAL.println("   ");
         }
     }
     
-    delay(990);
+    delay(488);
 }
