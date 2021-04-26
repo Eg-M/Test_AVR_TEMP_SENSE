@@ -75,19 +75,19 @@ void loop() {
         float temp1, hum1;
         if (NO_ERROR != sensor.read_meas_data_single_shot(HIGH_REP_WITH_STRCH, &temp1, &hum1))
         {
-            SERIAL.println("read temp failed!!");
+            SERIAL.println("read temp1 failed!!");
             SERIAL.println("   ");
             SERIAL.println("   ");
             SERIAL.println("   ");
         }
         else
         {
-            SERIAL.println("read data :");
-            SERIAL.print("temperature = ");
+            SERIAL.println("read data1 :");
+            SERIAL.print("temperature1 = ");
             SERIAL.print(temp1);
             SERIAL.println(" ℃ ");
 
-            SERIAL.print("humidity = ");
+            SERIAL.print("humidity1 = ");
             SERIAL.print(hum1);
             SERIAL.println(" % ");
 
@@ -101,7 +101,7 @@ void loop() {
         float temp2, hum2;
         if (NO_ERROR != sensor.read_meas_data_single_shot(HIGH_REP_WITH_STRCH, &temp2, &hum2))
         {
-            SERIAL.println("read temp failed!!");
+            SERIAL.println("read temp2 failed!!");
             SERIAL.println("   ");
             SERIAL.println("   ");
             SERIAL.println("   ");
@@ -109,11 +109,11 @@ void loop() {
         else
         {
             SERIAL.println("read data :");
-            SERIAL.print("temperature = ");
+            SERIAL.print("temperature2 = ");
             SERIAL.print(temp2);
             SERIAL.println(" ℃ ");
 
-            SERIAL.print("humidity = ");
+            SERIAL.print("humidity2 = ");
             SERIAL.print(hum2);
             SERIAL.println(" % ");
 
