@@ -50,7 +50,7 @@ SHT35 sensor(SCLPIN);
 
 
 void setup() {
-    SERIAL.begin(115200);
+    SERIAL.begin(9600);
     delay(10);
     SERIAL.println("serial start!!");
     if (sensor.init()) {
