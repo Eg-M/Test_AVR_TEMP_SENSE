@@ -67,9 +67,10 @@ void loop() {
     u8 data[6] = {0};
 
     flag = !flag;
+    
     digitalWrite(TEMP1,flag);
     digitalWrite(TEMP2,!flag);
-
+    delay(10);
     if (flag)
     {
         float temp1, hum1;
@@ -123,5 +124,5 @@ void loop() {
         }
     }
     
-    delay(1000);
+    delay(990);
 }
