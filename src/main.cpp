@@ -45,6 +45,9 @@
 #define TEMP2 4
 
 bool flag = 0;
+float temp1, hum1;
+float temp2, hum2;
+//unsigned long 
 
 SHT35 sensor(SCLPIN);
 
@@ -63,67 +66,77 @@ void setup() {
 
 
 void loop() {
-    u16 value = 0;
-    u8 data[6] = {0};
+   // u16 value = 0;
+    //u8 data[6] = {0};
 
     flag = !flag;
     
-    digitalWrite(TEMP1,flag);
-    digitalWrite(TEMP2,!flag);
-    delay(10);
-    if (flag)
-    {
-        float temp1, hum1;
-        if (NO_ERROR != sensor.read_meas_data_single_shot(HIGH_REP_WITH_STRCH, &temp1, &hum1))
-        {
-            SERIAL.println("read temp1 failed!!");
-            SERIAL.println("   ");
-            SERIAL.println("   ");
-            SERIAL.println("   ");
-        }
-        else
-        {
-            //SERIAL.println("read data1 :");
-            //SERIAL.print("temperature1 = ");
-            SERIAL.print(temp1);
-            //SERIAL.println(" ℃ ");
-            SERIAL.print(',');
-
-            //SERIAL.print("humidity1 = ");
-            SERIAL.print(hum1);
-            //SERIAL.println(" % ");
-            SERIAL.print(',');
-            //SERIAL.println("   ");
-            //SERIAL.println("   ");
-            //SERIAL.println("   ");
-        }
-    }
-    else if (!flag)
-    {
-        float temp2, hum2;
-        if (NO_ERROR != sensor.read_meas_data_single_shot(HIGH_REP_WITH_STRCH, &temp2, &hum2))
-        {
-            SERIAL.println("read temp2 failed!!");
-            SERIAL.println("   ");
-            SERIAL.println("   ");
-            SERIAL.println("   ");
-        }
-        else
-        {
-            //SERIAL.println("read data :");
-            //SERIAL.print("temperature2 = ");
-            SERIAL.print(temp2);
-            //SERIAL.println(" ℃ ");
-            SERIAL.print(',');
-            //SERIAL.print("humidity2 = ");
-            SERIAL.println(hum2);
-            //SERIAL.println(" % ");
-
-            //SERIAL.println("   ");
-            //SERIAL.println("   ");
-            //SERIAL.println("   ");
-        }
-    }
     
-    delay(488);
+    //delay(10);
+    if (!(millis() % 1000))
+    {
+        digitalWrite(TEMP1,flag);
+        digitalWrite(TEMP2,!flag);
+        if (flag)
+        {
+            
+            if (NO_ERROR != sensor.read_meas_data_single_shot(HIGH_REP_WITH_STRCH, &temp1, &hum1))
+            {
+                SERIAL.println("read temp1 failed!!");
+                SERIAL.println("   ");
+                SERIAL.println("   ");
+                SERIAL.println("   ");
+            }
+            else
+            {
+                //SERIAL.println("read data1 :");
+                //SERIAL.print("temperature1 = ");
+                // SERIAL.print(temp1);
+                //SERIAL.println(" ℃ ");
+                //SERIAL.print(',');
+
+                //SERIAL.print("humidity1 = ");
+                //SERIAL.print(hum1);
+                //SERIAL.println(" % ");
+                // SERIAL.print(',');
+                //SERIAL.println("   ");
+                //SERIAL.println("   ");
+                //SERIAL.println("   ");
+            }
+        }
+        else if (!flag)
+        {
+            
+            if (NO_ERROR != sensor.read_meas_data_single_shot(HIGH_REP_WITH_STRCH, &temp2, &hum2))
+            {
+                SERIAL.println("read temp2 failed!!");
+                SERIAL.println("   ");
+                SERIAL.println("   ");
+                SERIAL.println("   ");
+            }
+            else
+            {
+                //SERIAL.println("read data :");
+                //SERIAL.print("temperature2 = ");
+                // SERIAL.print(temp2);
+                //SERIAL.println(" ℃ ");
+                // SERIAL.print(',');
+                //SERIAL.print("humidity2 = ");
+                //  SERIAL.println(hum2);
+                //SERIAL.println(" % ");
+
+                //SERIAL.println("   ");
+                //SERIAL.println("   ");
+                //SERIAL.println("   ");
+            }
+        }
+        SERIAL.print(temp1);
+        SERIAL.print(',');
+        SERIAL.print(hum1);
+        SERIAL.print(',');
+        SERIAL.print(temp2);
+        SERIAL.print(',');
+        SERIAL.println(hum2);
+    }
+    //delay(488);
 }
