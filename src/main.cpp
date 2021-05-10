@@ -1,6 +1,6 @@
 #include <Arduino.h>
 
-/*
+/*    
     basic_demo.ino
     Example for MCP9600
     Copyright (c) 2018 Seeed Technology Co., Ltd.
