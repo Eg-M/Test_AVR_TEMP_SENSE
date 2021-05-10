@@ -29,7 +29,7 @@
 #include "Seeed_SHT35.h"
   
      
-/*SAMD core*/
+/*SAMD core*/ 
 #ifdef ARDUINO_SAMD_VARIANT_COMPLIANCE
     #define SDAPIN  20
     #define SCLPIN  21
