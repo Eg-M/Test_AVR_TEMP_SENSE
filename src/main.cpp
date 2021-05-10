@@ -1,6 +1,6 @@
 #include <Arduino.h>
- 
-/*    
+
+/*
     basic_demo.ino
     Example for MCP9600
     Copyright (c) 2018 Seeed Technology Co., Ltd.
@@ -24,7 +24,7 @@
     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
     THE SOFTWARE.
-*/   
+*/
 
 #include "Seeed_SHT35.h"
   
@@ -41,102 +41,43 @@
     //#define RSTPIN  4
     #define SERIAL Serial
 #endif
-#define TEMP1 2
-#define TEMP2 4
-
-bool flag = 0;
-float temp1, hum1;
-float temp2, hum2;
-//unsigned long 
 
 SHT35 sensor(SCLPIN);
 
 
 void setup() {
-    SERIAL.begin(9600);
+    SERIAL.begin(115200);
     delay(10);
     SERIAL.println("serial start!!");
     if (sensor.init()) {
         SERIAL.println("sensor init failed!!!");
     }
-    pinMode(TEMP1,OUTPUT);
-    pinMode(TEMP2,OUTPUT);
     delay(1000);
 }
 
 
 void loop() {
-   // u16 value = 0;
-    //u8 data[6] = {0};
+    u16 value = 0;
+    u8 data[6] = {0};
+    float temp, hum;
+    if (NO_ERROR != sensor.read_meas_data_single_shot(HIGH_REP_WITH_STRCH, &temp, &hum)) {
+        SERIAL.println("read temp failed!!");
+        SERIAL.println("   ");
+        SERIAL.println("   ");
+        SERIAL.println("   ");
+    } else {
+        SERIAL.println("read data :");
+        SERIAL.print("temperature = ");
+        SERIAL.print(temp);
+        SERIAL.println(" ℃ ");
 
-    flag = !flag;
-    
-    
-    //delay(10);
-    if (!(millis() % 1000))
-    {
-        digitalWrite(TEMP1,flag);
-        digitalWrite(TEMP2,!flag);
-        if (flag)
-        {
-            
-            if (NO_ERROR != sensor.read_meas_data_single_shot(HIGH_REP_WITH_STRCH, &temp1, &hum1))
-            {
-                SERIAL.println("read temp1 failed!!");
-                SERIAL.println("   ");
-                SERIAL.println("   ");
-                SERIAL.println("   ");
-            }
-            else
-            {
-                //SERIAL.println("read data1 :");
-                //SERIAL.print("temperature1 = ");
-                // SERIAL.print(temp1);
-                //SERIAL.println(" ℃ ");
-                //SERIAL.print(',');
+        SERIAL.print("humidity = ");
+        SERIAL.print(hum);
+        SERIAL.println(" % ");
 
-                //SERIAL.print("humidity1 = ");
-                //SERIAL.print(hum1);
-                //SERIAL.println(" % ");
-                // SERIAL.print(',');
-                //SERIAL.println("   ");
-                //SERIAL.println("   ");
-                //SERIAL.println("   ");
-            }
-        }
-        else if (!flag)
-        {
-            
-            if (NO_ERROR != sensor.read_meas_data_single_shot(HIGH_REP_WITH_STRCH, &temp2, &hum2))
-            {
-                SERIAL.println("read temp2 failed!!");
-                SERIAL.println("   ");
-                SERIAL.println("   ");
-                SERIAL.println("   ");
-            }
-            else
-            {
-                //SERIAL.println("read data :");
-                //SERIAL.print("temperature2 = ");
-                // SERIAL.print(temp2);
-                //SERIAL.println(" ℃ ");
-                // SERIAL.print(',');
-                //SERIAL.print("humidity2 = ");
-                //  SERIAL.println(hum2);
-                //SERIAL.println(" % ");
-
-                //SERIAL.println("   ");
-                //SERIAL.println("   ");
-                //SERIAL.println("   ");
-            }
-        }
-        SERIAL.print(temp1);
-        SERIAL.print(',');
-        SERIAL.print(hum1);
-        SERIAL.print(',');
-        SERIAL.print(temp2);
-        SERIAL.print(',');
-        SERIAL.println(hum2);
+        SERIAL.println("   ");
+        SERIAL.println("   ");
+        SERIAL.println("   ");
     }
-    //delay(488);
+    delay(1000);
 }

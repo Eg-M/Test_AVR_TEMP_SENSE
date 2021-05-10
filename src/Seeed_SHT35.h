@@ -72,7 +72,7 @@ typedef enum {
 #endif
 
 
-#define     DEFAULT_IIC_ADDR     0x45
+#define     DEFAULT_IIC_ADDR     0x44
 #define		NACK_ON_ADDR			2
 
 
