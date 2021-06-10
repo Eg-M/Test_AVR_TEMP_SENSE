@@ -75,8 +75,8 @@ void loop() {
     //delay(10);
     if (!(millis() % 1000))
     {
-        digitalWrite(TEMP1,flag);
-        digitalWrite(TEMP2,!flag);
+        
+        
         if (flag)
         {
             
@@ -137,6 +137,9 @@ void loop() {
         SERIAL.print(temp2);
         SERIAL.print(',');
         SERIAL.println(hum2);
+
+        digitalWrite(TEMP1,flag);
+        digitalWrite(TEMP2,!flag);
     }
     //delay(488);
 }
