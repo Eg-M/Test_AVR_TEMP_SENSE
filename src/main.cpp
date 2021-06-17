@@ -61,6 +61,7 @@ void setup() {
     }
     pinMode(TEMP1,OUTPUT);
     pinMode(TEMP2,OUTPUT);
+    digitalWrite(TEMP1,flag);
     delay(1000);
 }
 
@@ -132,7 +133,7 @@ void loop() {
         // }
         SERIAL.print(temp1);
         SERIAL.print(',');
-        SERIAL.print(hum1);
+        SERIAL.println(hum1);
         // SERIAL.print(',');
         // SERIAL.print(temp2);
         // SERIAL.print(',');
