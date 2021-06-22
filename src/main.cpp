@@ -63,8 +63,13 @@ void loop() {
         SERIAL.println(hum1);
        
     }
-    if (millis() % 5000)
-        sensor.change_heater_status(CMD_HEATER_OFF);
-        else sensor.change_heater_status(CMD_HEATER_ON);
+    if(SERIAL.available()!=0)
+    {
+        if (SERIAL.read()=='1')
+            sensor.change_heater_status(CMD_HEATER_ON);
+        if (SERIAL.read()=='3')
+            sensor.change_heater_status(CMD_HEATER_OFF);
+    }
+        
   
 }
